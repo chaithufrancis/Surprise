@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-size: cover; /* Make background image cover the entire page */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            transition: background-image 1s ease; /* Smooth transition for background change */
+        }
+        .container {
+            text-align: center;
+            border: 5px solid #ffcc00;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border-radius: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .yes-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .no-btn {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Hey, are you an idiot?</h1>
+    <button class="yes-btn" onclick="handleResponse('yes')">Yes</button>
+    <button class="no-btn" onclick="handleResponse('no')">No</button>
+    
+    <div id="response" style="margin-top: 20px;"></div>
+</div>
+
+<script>
+    let attemptCount = 0;
+    let backgroundIndex = 0;
+    const backgrounds = [
+        "background1.jpg", // Path to your first background image
+        "background2.jpg"  // Path to your second background image
+    ];
+
+    // Function to change background every few seconds
+    function changeBackground() {
+        backgroundIndex = (backgroundIndex + 1) % backgrounds.length;
+        document.body.style.backgroundImage = `url(${backgrounds[backgroundIndex]})`;
+        setTimeout(changeBackground, 5000); // Change background every 5 seconds
+    }
+
+    changeBackground(); // Start changing backgrounds
+
+    function handleResponse(answer) {
+        const responseDiv = document.getElementById('response');
+        if (answer === 'yes') {
+            responseDiv.innerHTML = "Yes, you are the cutest idiot! 😊";
+        } else {
+            attemptCount++;
+            if (attemptCount < 3) {
+                responseDiv.innerHTML = "Oops! Click again.";
+            } else {
+                responseDiv.innerHTML = "You are an idiot! But you’re also awesome! ❤️";
+                responseDiv.innerHTML += '<p>Remember, being an idiot can be cute sometimes!</p>';
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
